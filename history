@@ -1,0 +1,93 @@
+ 1  clear
+    2  yum update -y
+    3  yum upgrade -y
+    4  yum install docker -y
+    5  systemctl start docker
+    6  systemctl enable docker
+    7  docker -version
+    8  docker -v
+    9  clear
+   10  yum install docker -y
+   11  systemctl start docker
+   12  sudo systemctl enable, docker
+   13  sudo systemctl enable  docker
+   14  yum install docker -y
+   15  systemctl start docker
+   16  sudo systemctl enable  docker
+   17  docker -v
+   18  clear
+   19  mkdir project1
+   20  cd project1
+   21  mkdir Docker1 Docker2 Docker3
+   22  ls
+   23  ls -l
+   24  cd ~/project1/Docker1
+   25  vim aviana.txt
+   26  vim bryant.txt
+   27  vim kyron.txt
+   28  vim Rowland.txt
+   29  vim Suhayb.txt
+   30  ls -l
+   31  cat kyron.txt
+   32  cd ~/project1/Docker2
+   33  vim Aaisha.txt
+   34  vim Aleah.txt
+   35  vim Arnold.txt
+   36  vim Hall.txt
+   37  vim Rhea.txt
+   38  vim Skinner.txt
+   39  ls -l
+   40  cat Skinner.txt
+   41  cd ~/project1/Docker3
+   42  vim Chan.txt
+   43  vim Costa.txt
+   44  vim Cydney.txt
+   45  vim Frederick.txt
+   46  vim Hampton.txt
+   47  vim Jane.txt
+   48  vim Luna.txt
+   49  vim Yassin.txt
+   50  ls -l
+   51  cat Luna.txt
+   52  cd ~/project1
+   53  docker pull ubuntu
+   54  sudo docker run -dit --name cont1 -v $(pwd)/Docker1:/texts ubuntu bash
+   55  sudo docker run -dit --name cont2 -v $(pwd)/Docker2:/texts ubuntu bash
+   56  sudo docker run -dit --name cont3 -v $(pwd)/Docker3:/texts ubuntu bash
+   57  docker ps
+   58  sudo docker exec docker2 bash -c "ls -l /texts | sort -k5n"
+   59  clear
+   60  sudo docker exec cont2 bash -c "ls -l /texts | sort -k5n"
+   61  sudo docker exec cont3 bash -c "ls -l /texts | sort -k5n"
+   62  touch HOUSE_OF_THE_DOCKERS.txt
+   63  ls
+   64  cat Docker1/Vim_aviana.txt Docker1/bryant.txt >> HOUSE_OF_THE_DOCKERS.txt
+   65  rm HOUSE_OF_THE_DOCKERS.txt
+   66  clear
+   67  touch HOUSE_OF_THE_DOCKERS.txt
+   68  ls
+   69  cat Docker1/vim aviana.txt Docker1/bryant.txt >> HOUSE_OF_THE_DOCKERS.txt
+   70  rm HOUSE_OF_THE_DOCKERS.txt
+   71  touch HOUSE_OF_THE_DOCKERS.txt
+   72  ls
+   73  cat Docker1/aviana.txt Docker1/bryant.txt >> HOUSE_OF_THE_DOCKERS.txt
+   74  cat $(ls -S Docker2 | head -n 2 | xargs -I{} echo Docker2/{}) >> HOUSE_OF_THE_DOCKERS.txt
+   75  cat $(ls -S Docker3 | head -n 2 | xargs -I{} echo Docker3/{}) >> HOUSE_OF_THE_DOCKERS.txt
+   76  cat Docker1/kyron.txt Docker1/Rowland.txt >> HOUSE_OF_THE_DOCKERS.txt
+   77  cat $(ls -S Docker2 | sed -n '3,4p' | xargs -I{} echo Docker2/{}) >> HOUSE_OF_THE_DOCKERS.txt
+   78  cat $(ls -S Docker3 | sed -n '3,4p' | xargs -I{} echo Docker3/{}) >> HOUSE_OF_THE_DOCKERS.txt
+   79  cat Docker1/Suhayb.txt >> HOUSE_OF_THE_DOCKERS.txt
+   80  cat $(ls -S Docker2 | sed -n '5,6p' | xargs -I{} echo Docker2/{}) >> HOUSE_OF_THE_DOCKERS.txt
+   81  cat $(ls -S Docker3 | sed -n '5,8p' | xargs -I{} echo Docker3/{}) >> HOUSE_OF_THE_DOCKERS.txt
+   82  clear
+   83  cat HOUSE_OF_THE_DOCKERS.txt
+   84  vim HOUSE_OF_THE_DOCKERS.txt
+   85  cat HOUSE_OF_THE_DOCKERS.txt
+   86  sed -i '/That’s what this storm’s all about/d' HOUSE_OF_THE_DOCKERS.txt
+   87  cat HOUSE_OF_THE_DOCKERS.txt
+   88  sudo docker stop cont1 cont2 cont3
+   89  docker ps -a
+   90  sudo docker rm docker1 docker2 docker3
+   91  sudo docker rm  cont1 cont2 cont3
+   92  clear
+   93  history
