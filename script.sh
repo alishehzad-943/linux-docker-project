@@ -132,7 +132,7 @@ cat $(ls -S Docker3 | sed -n '5,8p' | xargs -I{} echo Docker3/{}) >>  HOUSE_OF_T
 echo "Round Robin complete. Final book created:  HOUSE_OF_THE_DOCKERS.txt"
 
 # Step 7: Interactive options
-FINAL_BOOK=P HOUSE_OF_THE_DOCKERS.txt
+FINAL_BOOK=HOUSE_OF_THE_DOCKERS.txt
 echo "Finished loading text."
 
 while true; do
@@ -168,5 +168,5 @@ while true; do
     fi
 done
 
-# Step 8: Cleanup Docker containers
+# Step 8: complete
 echo "Automation complete."
