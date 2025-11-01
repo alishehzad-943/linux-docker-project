@@ -55,6 +55,7 @@ sudo docker run -dit --name container2 -v $(pwd)/Docker2:/app my-image bash
 sudo docker run -dit --name container3 -v $(pwd)/Docker3:/app my-image bash
 
 #STEP 6: Scheduling Simulation 
+Student ID last Digit is equal to Zero(0)
 # FCFS – Container1 (No sorting)
 echo "FCFS (Container1)"
 sudo docker exec container1 bash -c "ls -l /app"
@@ -64,7 +65,7 @@ echo "SJN (Container2) "
 sudo docker exec container2 bash -c "ls -l /app | sort -k5n"
 
 # SJN – Container3 (Sort by file size)
-echo " (Container3)"
+echo " SJN (Container3)"
 sudo docker exec container3 bash -c "ls /app | sort  -k5n"
 
 # STEP 7: Merging files in HOUSE_OF_THE_DOCKERS 
@@ -90,8 +91,44 @@ cat Docker1/Suhayb.txt >> HOUSE_OF_THE_DOCKERS.txt
 cat $(ls -S Docker2 | sed -n '5,6p' | xargs -I{} echo Docker2/{}) >> HOUSE_OF_THE_DOCKERS.txt
 cat $(ls -S Docker3 | sed -n '5,8p' | xargs -I{} echo Docker3/{}) >> HOUSE_OF_THE_DOCKERS.txt
 
+echo "Round Robin complete. Final book created:  HOUSE_OF_THE_DOCKERS.txt"
 
-echo "FINAL OUTPUT"
-cat HOUSE_OF_THE_DOCKERS.txt
+# Step 8: Interactive options
+FINAL_BOOK=HOUSE_OF_THE_DOCKERS.txt
+echo "Finished loading text."
 
+while true; do
+    echo "Would you like to read the final book? (Yes/No)"
+    read choice
+    if [[ "$choice" =~ ^([Yy][Ee][Ss]|[Yy])$ ]]; then
+        cat $FINAL_BOOK
+    fi
+
+    echo "Would you like to remove any text? (Yes/No)"
+    read choice
+    if [[ "$choice" =~ ^([Yy][Ee][Ss]|[Yy])$ ]]; then
+        echo "Enter exact text or pattern to remove:"
+        read pattern
+        sed -i "/$pattern/d" $FINAL_BOOK
+        echo "Text removed."
+    fi
+
+    echo "Would you like to add any text? (Yes/No)"
+    read choice
+    if [[ "$choice" =~ ^([Yy][Ee][Ss]|[Yy])$ ]]; then
+        echo "Enter text to add:"
+        read new_text
+        echo "$new_text" >> $FINAL_BOOK
+        echo "Text added."
+    fi
+
+    echo "Would you like to terminate the program? (Yes/No)"
+    read choice
+    if [[ "$choice" =~ ^([Yy][Ee][Ss]|[Yy])$ ]]; then
+        echo "Program terminated."
+        break
+    fi
+done
+
+# Step 9: complete
 echo "SCRIPT EXECUTION COMPLETE"
