@@ -13,7 +13,7 @@ docker -v
 mkdir -p ~/docker-files/Docker1 ~/docker-files/Docker2 ~/docker-files/Docker3
 cd ~/docker-files
 
-# Docker1 Files Creation
+#Step 3: Docker1 Files Creation and paste content
 cd Docker1
 echo "Atticus said to Jem one day, I’d rather you shot at tin cans in the backyard, but I know you’ll go after birds.
 Shoot all the blue jays you want, if you can hit ‘em, but remember it’s a sin to kill a mockingbird." > Aviana.txt
@@ -23,7 +23,7 @@ echo "They don’t eat up people’s gardens, don’t nest in corn cribs, they d
 echo "That’s why it’s a sin to kill a mockingbird." > Suhayb.txt
 
 
-# Docker2 Files Creation
+#Step 4: Docker2 Files Creation and paste content
 cd ~/docker-files/Docker2
 echo "The most important things are the hardest to say. They are the things you get ashamed of, 
 because words diminish them — words shrink things that seemed limitless when they were in yourhead to no more than living size when they’re brought out." > Aaisha.txt
@@ -34,7 +34,7 @@ or why you thought it was so important that you almost cried while you were sayi
 echo "That’s the worst, I think." > Rhea.txt
 echo "When the secret stays locked within not for want of a teller but for want of an understanding ear." > Skinner.txt
 
-# Docker3 Files Creation
+# Step 5:Docker3 Files Creation and content paste
 cd ~/docker-files/Docker3
 echo "“Sometimes fate is like a small sandstorm that keeps changing directions. You change direction but the sandstorm chases you.
 You turn again, but the storm adjusts. Over and over you play this out, like some ominous dance with death just before dawn." > Chan.txt
@@ -49,30 +49,30 @@ echo "People will bleed there, and you will bleed too. Hot, red blood. You’ll 
 echo "And once the storm is over you won’t remember how you made it through, how you managed to survive. You won’t even be sure, in fact, whether the storm is really over." > Luna.txt
 echo "But one thing is certain. When you come out of the storm you won’t be the same person who walked in. That’s what this storm’s all about." > Yassin.txt
 
-# Dockerfile Creation
+#Step 6: Dockerfile Creation
 cd ~/docker-files
 cat <<EOF > Dockerfile
-FROM ubuntu
-RUN mkdir /text_files && apt update -y
+FROM ubuntu:latest
+RUN apt-get update -y && mkdir /text_files
 WORKDIR /text_files
-CMD ["sh"]
+CMD ["bash"]
 EOF
 
-# Build Docker Image
+#Step 7: Build Docker Image
 docker build -t my-image .
 
-# Run Three Containers with Volumes
+#Step 8: Run Three Containers with Volumes
 docker run -dit --name conta1 -v ~/docker-files/Docker1:/text_files my-image
 docker run -dit --name conta2 -v ~/docker-files/Docker2:/text_files my-image
 docker run -dit --name conta3 -v ~/docker-files/Docker3:/text_files my-image
 
-# Display Containers and File Lists
+#Step 9: Display Containers and File Lists
 docker ps -a
 docker exec conta1 ls /text_files
 docker exec conta2 ls /text_files
 docker exec conta3 ls /text_files
 
-#Student ID last Digit is equal to 3 therefore 
+#Step 10:Student ID last Digit is equal to 3 therefore 
 #Docker1 files : FCFS (first come fist serve)
 #Docker2 files : SJN (Shortest Job nexr)
 #Docker3 files : SJN (Shortest job next)
@@ -82,7 +82,7 @@ sudo docker exec conta2 bash -c "ls -l /text_files | sort -k5n"
 sudo docker exec conta3 bash -c "ls -l /text_files | sort -k5n"
 
 
-# Combine Files into Final Text File
+# Step 11: Combine Files into Final Text File
 cd ~/docker-files
 touch HOUSE_OF_THE_DOCKERS.txt
 
@@ -101,7 +101,44 @@ cat Docker1/Suhayb.txt >> HOUSE_OF_THE_DOCKERS.txt
 cat $(ls -S Docker2 | sed -n '5,6p' | xargs -I{} echo Docker2/{}) >> HOUSE_OF_THE_DOCKERS.txt
 cat $(ls -S Docker3 | sed -n '5,8p' | xargs -I{} echo Docker3/{}) >> HOUSE_OF_THE_DOCKERS.txt
 
+echo "Round Robin complete. Final book chapter:  HOUSE_OF_THE_DOCKERS.txt"
 
-# Show Final File
-# -------------------------------
-cat HOUSE_OF_THE_DOCKERS.txt
+#Step 12: Interactive options
+FINAL_BOOK=HOUSE_OF_THE_DOCKERS.txt
+echo "Finished loading text."
+
+while true; do
+    echo "Would you like to read the final book? (Yes/No)"
+    read choice
+    if [[ "$choice" =~ ^([Yy][Ee][Ss]|[Yy])$ ]]; then
+        cat $FINAL_BOOK
+    fi
+
+    echo "Would you like to remove any text? (Yes/No)"
+    read choice
+    if [[ "$choice" =~ ^([Yy][Ee][Ss]|[Yy])$ ]]; then
+        echo "Enter exact text or pattern to remove:"
+        read pattern
+        sed -i "/$pattern/d" $FINAL_BOOK
+        echo "Text removed."
+    fi
+
+    echo "Would you like to add any text? (Yes/No)"
+    read choice
+    if [[ "$choice" =~ ^([Yy][Ee][Ss]|[Yy])$ ]]; then
+        echo "Enter text to add:"
+        read new_text
+        echo "$new_text" >> $FINAL_BOOK
+        echo "Text added."
+    fi
+
+    echo "Would you like to terminate the program? (Yes/No)"
+    read choice
+    if [[ "$choice" =~ ^([Yy][Ee][Ss]|[Yy])$ ]]; then
+        echo "Program terminated."
+        break
+    fi
+done
+
+#Last step: Script complete
+echo "Automation complete."
