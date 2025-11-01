@@ -65,7 +65,7 @@ sudo docker run -dit --name container2 -v $(pwd)/Docker2:/app my-image bash
 sudo docker run -dit --name container3 -v $(pwd)/Docker3:/app my-image bash
 
 #STEP 6: Scheduling Simulation 
-Student ID last Digit is equal to Zero(0)
+#Student ID last Digit is equal to Zero(0)
 # FCFS – Container1 (No sorting)
 echo "FCFS (Container1)"
 sudo docker exec container1 bash -c "ls -l /app"
@@ -76,7 +76,7 @@ sudo docker exec container2 bash -c "ls -l /app | sort -k5n"
 
 # SJN – Container3 (Sort by file size)
 echo " SJN (Container3)"
-sudo docker exec container3 bash -c "ls /app | sort  -k5n"
+sudo docker exec container3 bash -c "ls -l  /app | sort  -k5n"
 
 # STEP 7: Merging files in HOUSE_OF_THE_DOCKERS 
 cd ~/Docker-files
