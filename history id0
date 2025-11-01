@@ -1,0 +1,114 @@
+ 1  clear
+    2  sudo yum  update -y
+    3  sudo yum  upgrade -y
+    4  sudo yum  install docker -y
+    5  systemctl enable docker
+    6  sudo systemctl start docker
+    7  docker -v
+    8  clear
+    9  sudo yum  update -y
+   10  sudo yum  upgrade -y
+   11  sudo yum  install docker -y
+   12  sudo systemctl start docker
+   13  systemctl enable docker
+   14  docker -v
+   15  mkdir Docker-files
+   16  cd Docker-files/
+   17  mkdir Docker1 Docker2 Docker3
+   18  ls
+   19  cd
+   20  cd Docker1
+   21  cd /Docker-files/Docker1
+   22  clear
+   23  cd ~/Docker-files/Docker1
+   24  pwd
+   25  echo "Atticus said to Jem one day, I’d rather you shot at tin cans in the backyard, but I know you’ll go after birds.Shoot all the blue jays you want, if you can hit ‘em, but remember it’s a sin to kill a mockingbird." > Aviana.txt
+   26  echo "That was the only time I ever heard Atticus say it was a sin to do something, and I asked Miss Maudie about it." > Bryant.txt
+   27   echo "“Your father’s right,” she said. “Mockingbirds don’t do one thing except make music for us to enjoy." > kyron.txt
+   28  echo "They don’t eat up people’s gardens, don’t nest in corn cribs, they don’t do one thing but sing their hearts out for us." > Rowland.txt
+   29   echo "That’s why it’s a sin to kill a mockingbird." > Suhayb.txt
+   30  ls
+   31  cat Suhayb.txt
+   32  cd
+   33  cd ~/Docker-files/Docker2
+   34  pwd
+   35   echo "The most important things are the hardest to say. They are the things you get ashamed of, because words diminish them words shrink things that seemed limitless when they were in your head to no more than living size when they’re brought out." > Aaisha.txt
+   36  echo "But it’s more than that, isn’t it?" > Aleah.txt
+   37  echo "The most important things lie too close to wherever your secret heart is buried, like landmarks to a treasure your enemies would love to steal away." > Arnold.txt
+   38  echo "The most important things lie too close to wherever your secret heart is buried, like landmarks to a treasure your enemies would love to steal away." > Arnold.txt
+   39  rm -f Aleah.txt Arnold.txt Aaisha.txt
+   40  ls
+   41  clear
+   42  echo "The most important things are the hardest to say. They are the things you get ashamed of, because words diminish them — words shrink things that seemed limitless when they were in your head to no more than living size when they’re brought out." > Aaisha.txt
+   43  echo "But it’s more than that, isn’t it?" > Aleah.txt
+   44  echo "The most important things lie too close to wherever your secret heart is buried, like landmarks to a treasure your enemies would love to steal away." > Arnold.txt
+   45  ls
+   46  echo "And you may make revelations that cost you dearly only to have people look at you in a funny way, not understanding what you’ve said at all, or why you thought it was so important that you almost cried while you were saying it." >Hall.txt
+   47   echo "That’s the worst, I think." > Rhea.txt
+   48  echo "When the secret stays locked within not for want of a teller but for want of an understanding ear." > Skinner.txt
+   49  ls -l
+   50  cd ~/Docker-files/Docker3
+   51  clear
+   52  cd ~/Docker-files/Docker3
+   53  echo "“Sometimes fate is like a small sandstorm that keeps changing directions. You change direction but the sandstorm chases you. You turn again, but the storm adjusts. Over and over you play this out, like some ominous dance with death just before dawn." >Chan.txt
+   54  echo "Why? Because this storm isn’t something that blew in from far away, something that has nothing to do with you. This storm is you. Something inside of you." > Costa.txt
+   55  echo "So all you can do is give in to it, step right inside the storm, closing your eyes and plugging up your ears so the sand doesn’t get in, and walk through it, step by step." > Cydney.txt
+   56  echo "There’s no sun there, no moon, no direction, no sense of time. Just fine white sand swirling up into the sky like pulverized bones. That’s the kind of sandstorm you need to imagine." > Frederick.txt
+   57  ls
+   58  echo "And you really will have to make it through that violent, metaphysical, symbolic storm. No matter how metaphysical or symbolic it might be, make no mistake about it: it will cut through flesh like a thousand razor blades." > Hampton.txt
+   59  echo "People will bleed there, and you will bleed too. Hot, red blood. You’ll catch that blood in your hands, your own blood and the blood of others." > Jane.txt
+   60  echo "And once the storm is over you won’t remember how you made it through, how you managed to survive. You won’t even be sure, in fact, whether the storm is really over." > Luna.txt
+   61  echo "But one thing is certain. When you come out of the storm you won’t be the same person who walked in. That’s what this storm’s all about." > Yassin.txt
+   62  ls -l
+   63  clead
+   64  clear
+   65  cd
+   66  cd Docker-files/
+   67  vim Dockerfile
+   68  cat Dockerfile
+   69  docker build -t my-image .
+   70  sudo docker run -dit --name container1 -v $(pwd)/Docker1:/app my-image bash
+   71  sudo docker run -dit --name container2 -v $(pwd)/Docker1:/app my-image bash
+   72  docker rmi -f $(docker ps -aq)
+   73  docker rm -f $(docker ps -aq)
+   74  docker images
+   75  clear
+   76  sudo docker run -dit --name container1 -v $(pwd)/Docker1:/app my-image bash
+   77  sudo docker run -dit --name container2 -v $(pwd)/Docker2:/app my-image bash
+   78  sudo docker run -dit --name container3 -v $(pwd)/Docker3:/app my-image bash
+   79  docker ps
+   80  docker images
+   81  sudo docker exec container2 bash -c "ls -l /app | sort -k5n"
+   82  clear
+   83  touch HOUSE_OF_THE_DOCKERS.txt
+   84  ls
+   85  cat Docker1/aviana.txt Docker1/bryant.txt >> HOUSE_OF_THE_DOCKERS.txt
+   86  rm HOUSE_OF_THE_DOCKERS.txt
+   87  clear
+   88  touch HOUSE_OF_THE_DOCKERS.txt
+   89  ls
+   90  cat Docker1/Aviana.txt Docker1/Bryant.txt >> HOUSE_OF_THE_DOCKERS.txt
+   91  ls
+   92  cat $(ls -S Docker2 | head -n 2 | xargs -I{} echo Docker2/{}) >> HOUSE_OF_THE_DOCKERS.txt
+   93  ls
+   94   cat $(ls -S Docker3 | head -n 2 | xargs -I{} echo Docker3/{}) >> HOUSE_OF_THE_DOCKERS.txt
+   95  ls
+   96  clear
+   97  cat Docker1/kyron.txt Docker1/Rowland.txt >> HOUSE_OF_THE_DOCKERS.txt
+   98  ls
+   99  cat $(ls -S Docker2 | sed -n '3,4p' | xargs -I{} echo Docker2/{}) >> HOUSE_OF_THE_DOCKERS.txt
+  100  ll
+  101  cat $(ls -S Docker3 | sed -n '3,4p' | xargs -I{} echo Docker3/{}) >> HOUSE_OF_THE_DOCKERS.txt
+  102  ls
+  103  cat Docker1/Suhayb.txt >> HOUSE_OF_THE_DOCKERS.txt
+  104  ls
+  105   cat $(ls -S Docker2 | sed -n '5,6p' | xargs -I{} echo Docker2/{}) >> HOUSE_OF_THE_DOCKERS.txt
+  106  cat $(ls -S Docker3 | sed -n '5,8p' | xargs -I{} echo Docker3/{}) >> HOUSE_OF_THE_DOCKERS.txt
+  107  ls
+  108  clear
+  109  cat HOUSE_OF_THE_DOCKERS.txt
+  110  clear
+  111  vim HOUSE_OF_THE_DOCKERS.txt
+  112  cat HOUSE_OF_THE_DOCKERS.txt
+  113  clear
+  114  history
